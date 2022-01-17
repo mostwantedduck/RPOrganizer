@@ -10,7 +10,7 @@ PS C:\Users\daniel\Desktop\RP> .\rp-win-x86.exe -f "somedll.dll" -r 5 > rop.txt
 Usage:
 
 ```bash
-PS C:\Users\daniel> .\RPOrganizer.exe -i C:\Temp\ROP.txt -o C:\Temp\Output.txt
+PS C:\Users\daniel> .\RPOrganizer.exe C:\Temp\ROP.txt C:\Temp\Output.txt
 [+] Loaded 195983 gadgets...
 
 [!] Found 0 "DEREF" gadgets...
