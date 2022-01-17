@@ -1,6 +1,5 @@
 ﻿using RPOrganizer.Services;
 using System;
-using CommandLine;
 
 namespace RPOrganizer;
 
@@ -8,40 +7,17 @@ internal partial class Program
 {
     static void Main(string[] args)
     {
-        var inputRopFile = string.Empty;
-        var outputGadgetsFile = string.Empty;
-
-        Parser.Default.ParseArguments<CommandLineOptions>(args)
-               .WithParsed(o =>
-               {
-                   if (o.Verbose)
-                   {
-                       Console.WriteLine($"Verbose output enabled");
-                   }
-
-                   if (string.IsNullOrEmpty(o.InputFile))
-                   {
-                       Console.WriteLine($"Usage: RPOrganizer.exe -i rop.txt -o output.txt");
-                       return;
-                   }
-                   else
-                   {
-                       inputRopFile = o.InputFile;
-                   }
-
-                   if (string.IsNullOrEmpty(o.OutputFile))
-                   {
-                       Console.WriteLine($"Usage: RPOrganizer.exe -i C:\\rop.txt -o C:\\output.txt");
-                       return;
-                   }
-                   else
-                   {
-                       outputGadgetsFile = o.OutputFile;
-                   }
-               });
+        if (args == null || args.Length < 2)
+        {
+            ConsoleWriter.WriteLine("Usage: RPOrganizer.exe C:\\rop.txt C:\\output.txt", ConsoleColor.Red);
+            return;
+        }
 
         try
         {
+            var inputRopFile = args[0].ToString();
+            var outputGadgetsFile = args[1].ToString();
+
             var ropFile = new RopFile(inputRopFile, outputGadgetsFile);
             var ropFileContents = ropFile.ReadFile();
 
